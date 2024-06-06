@@ -42,7 +42,16 @@ And in order to run that a.out file, we must execute on the terminal:
 ```terminal
 reinier@reinier % ./your_prefered_executable_file_name
 
-
+Enter the mass (Kg): 12
+Enter the velocity (m/s): 3
+The Kinetic Energy (KE) of the object is equal to 54.00 joules.
+Would you like to keep calculating the Kinetic Energy (y/n)? y
+Enter the mass (Kg): -4
+You must type a number greater or equal than 0.00. Try again!
+Enter the mass (Kg): 23243
+Enter the velocity (m/s): 344
+The Kinetic Energy (KE) of the object is equal to 1,375,241,824.00 joules.
+Would you like to keep calculating the Kinetic Energy (y/n)? n
   
 Process finished with exit code 0
 reinier@reinier % 
