@@ -192,8 +192,48 @@ bool is_prime(const unsigned long long int value) {
 //     }
 // };
 
-int main() {
 
+void scold_user_if_invalid_input(long double, double);
+
+long double kinetic_energy(long double, long double);
+
+bool is_invalid(long double, double);
+
+int main() {
+    bool keep_calculating = false;
+
+    do {
+        long double mass;
+        long double velocity;
+
+        do {
+            mass = get_value<long double>("Enter the mass (Kg): ");
+            scold_user_if_invalid_input(mass, 0);
+        } while (is_invalid(mass, 0));
+
+        do {
+            velocity = get_value<long double>("Enter the velocity (m/s): ");
+            scold_user_if_invalid_input(velocity, 0);
+        } while (is_invalid(velocity, 0));
+
+        std::cout << std::fixed << std::setprecision(2);
+        std::cout << "The kinetic energy of the object is " << humanize_double(kinetic_energy(mass, velocity)) << " joules." << std::endl;
+
+        auto keep_calculating_str = get_value<std::string>("Would you like to keep calculating the Kinetic Energy (y/n)? ");
+        keep_calculating = keep_calculating_str != "n" && keep_calculating_str != "N";
+    } while (keep_calculating);
 
     return 0;
+}
+
+long double kinetic_energy(const long double mass, const long double velocity) {
+    return 0.5 * mass * pow(velocity, 2);
+};
+
+bool is_invalid(const long double value, const double min_value) {
+    return value < min_value;
+}
+
+void scold_user_if_invalid_input(const long double value, const double min_value) {
+    if (is_invalid(value, min_value)) std::cout << "You must type a number greater or equal than " << min_value << ". Try again!" << std::endl;
 }
