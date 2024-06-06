@@ -48,7 +48,7 @@ int main() {
         } while (is_invalid(velocity, 0));
 
         std::cout << std::fixed << std::setprecision(2);
-        std::cout << "The kinetic energy of the object is " << humanize_unsigned_double(kinetic_energy(mass, velocity)) << " joules." << std::endl;
+        std::cout << "The Kinetic Energy (KE) of the object is equal to " << humanize_unsigned_double(kinetic_energy(mass, velocity)) << " joules." << std::endl;
 
         auto keep_calculating_str = get_value<std::string>("Would you like to keep calculating the Kinetic Energy (y/n)? ");
         keep_calculating = keep_calculating_str != "n" && keep_calculating_str != "N";
