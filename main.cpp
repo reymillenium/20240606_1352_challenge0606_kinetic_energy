@@ -18,7 +18,7 @@
 #include <sstream>
 
 template<typename T>
-auto get_value(const std::string &message) -> T;
+auto get_value(const std::string &) -> T;
 
 std::string humanize_unsigned_integer(unsigned long long int);
 
@@ -51,7 +51,9 @@ int main() {
         std::cout << "The Kinetic Energy (KE) of the object is equal to " << humanize_unsigned_double(kinetic_energy(mass, velocity)) << " joules." << std::endl;
 
         auto keep_calculating_str = get_value<std::string>("Would you like to keep calculating the Kinetic Energy (y/n)? ");
-        keep_calculating = keep_calculating_str != "n" && keep_calculating_str != "N";
+        // Transforms keep_calculating_str to lowercase
+        std::transform(keep_calculating_str.begin(), keep_calculating_str.end(), keep_calculating_str.begin(), [](const unsigned char c) { return std::tolower(c); });
+        keep_calculating = keep_calculating_str != "n" && keep_calculating_str != "no";
     } while (keep_calculating);
 
     return 0;
@@ -83,7 +85,7 @@ std::string humanize_unsigned_double(const long double double_value, const int p
     // Places the decimals into the stream, rounded to two significant digits (by default)
     stream << std::fixed << std::setprecision(precision) << decimals;
     // Extracts the decimals from the stream, as a string, still rounded to two significant digits (by default)
-    const std::string decimals_as_string = stream.str(); // It still includeds the zero & the dot. Ex: 0.34 (the dot must be removed next)
+    const std::string decimals_as_string = stream.str(); // It still includeds the zero & the dot. Ex: "0.34" (so the zero must be removed next)
     return humanize_unsigned_integer(integer_value) + decimals_as_string.substr(1, precision + 1);
 }
 
